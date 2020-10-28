@@ -79,21 +79,6 @@ replace('\s*\\\\\s*', '\\\\')
 replace('\s+$', '')
 replace('\s+', ' ')
 
-
-
-'''
-result = result.sort_values(by=["Vacancy Name"])
-
-vacancies = result["Vacancy Name"].unique()
-
-data = "\n".join(vacancies)
-
-print(len(vacancies))
-
-with io.open("res.txt", 'w', encoding='utf8') as file:
-    file.write(data)
-'''
-
 result["City"] = result["City"].fillna("Не указан")
 
 result["Salary Min"] = result.groupby(["Vacancy Name", "City"])["Salary Min"].transform(lambda x: x.fillna(x.mean()))
@@ -109,9 +94,6 @@ result["Responsibility"] = result["Responsibility"].fillna("Нету")
 result["Requirement"] = result["Requirement"].fillna("Нету")
 result["Key Skills"] = result["Key Skills"].fillna("Нету")
 
-print(result)
-
 result.to_csv("lab4-result.csv",  na_rep = 'NA', index=True, index_label="",quotechar='"',quoting=csv.QUOTE_NONNUMERIC, encoding="utf-8-sig")
 
-
-#print(vacancies)
+print(result)
